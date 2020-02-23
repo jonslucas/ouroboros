@@ -19,9 +19,10 @@ const checkUser = async(pass, hash) => {
 
 // Middleware for user authentication
 export const authenticate = async (req, res, next) => {
-  const [, userAndPass] = req.headers.authorization.split(' ');
-  const [user, pass] = userAndPass.split(':');
   try {
+    // TODO: Replace with better auth method.   
+    const [, userAndPass] = req.headers.authorization.split(' ');
+    const [user, pass] = userAndPass.split(':');
     const u = await User.findOne({username: user});
     const verif = await checkUser(pass, u.pass);
     
