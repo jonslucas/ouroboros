@@ -2,15 +2,17 @@ import express, { json, urlencoded } from 'express';
 import { join } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import { connect, connection } from 'mongoose';
+import mongoose from 'mongoose';
 
-connect('mongodb://localhost', {
+mongoose.set('useCreateIndex', true);
+
+mongoose.connect('mongodb://localhost', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-connection.on('error', (err) => console.error(err));
-connection.once('open', () => console.log('connected to database'));
+mongoose.connection.on('error', (err) => console.error(err));
+mongoose.connection.once('open', () => console.log('connected to database'));
 
 import usersRouter from './routes/users';
 
