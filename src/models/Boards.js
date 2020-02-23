@@ -17,4 +17,4 @@ const boardSchema = new Schema({
   })],
 });
 
-module.export = model('Board', boardSchema);
+module.exports = model('Board', boardSchema);
