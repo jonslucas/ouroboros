@@ -6,13 +6,14 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  firstName: String,
+  lastName: String,
   pass: {
     type: String,
     required: true,
   },
   boards: {
     type: [Schema.Types.ObjectId],
-    default: [],
   }
 });
 
