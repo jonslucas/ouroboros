@@ -16,13 +16,20 @@ router.get('/', authenticate, async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  const { username, password } = req.body;
+  const {
+    username,
+    password,
+    firstName,
+    lastName
+  } = req.body;
   try {
     const hash = await genHash(password);
     
     const u = new User({
       username,
       pass: hash,
+      firstName,
+      lastName,
     });
     
     const newUser = await u.save();
