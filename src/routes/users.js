@@ -4,7 +4,7 @@ import { authenticate, genHash } from '../utils/userAuth';
 
 const router = Router();
 
-/* GET users listing. */
+// Get list of Users
 router.get('/', authenticate, async (req, res, next) => {
   try {
     const users = await User.find();
@@ -15,6 +15,7 @@ router.get('/', authenticate, async (req, res, next) => {
   
 });
 
+// Create new User
 router.post('/', async (req, res, next) => {
   const {
     username,
@@ -41,6 +42,7 @@ router.post('/', async (req, res, next) => {
 
 });
 
+// Get User from ID middlewear
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
@@ -59,6 +61,7 @@ const getUser = async (req, res, next) => {
 
 }
 
+// Get a particular User
 router.get('/:id', authenticate, getUser, async (req, res) => {
   res.json(res.user);
 });
@@ -67,9 +70,13 @@ router.get('/:id', authenticate, getUser, async (req, res) => {
 router.get('/:id/boards', authenticate, getUser, async (req, res) => {
   res.json(res.user.boards);
 });
+
+// Update a User
 router.patch('/:id', authenticate, getUser, async (req, res) => {
 
 });
+
+// Remove a User
 router.delete('/:id', authenticate, getUser, async (req, res) => {
   try {
     await res.user.remove();
