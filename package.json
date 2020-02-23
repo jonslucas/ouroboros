@@ -3,13 +3,39 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "server": "node  ./dist/bin/www.js",
+    "clean": "rimraf dist",
+    "transpile": "babel ./src --out-dir dist",
+    "build": "npm-run-all clean transpile",
+    "dev": "NODE_ENV=development npm-run-all build server", 
+    "watch:dev": "nodemon"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": { "node": "10" }
+        }
+      ]
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": ["src/*"]
   },
   "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "bcrypt": "^4.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "mongoose": "^5.9.2",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
   }
 }

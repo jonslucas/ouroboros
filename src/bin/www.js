@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-import app, { set } from '../app';
-var debug = require('debug')('ouroboros:server');
+import app from '../app';
+var debug = require('debug')('portfolio:server');
 import { createServer } from 'http';
 
 /**
@@ -13,7 +13,7 @@ import { createServer } from 'http';
  */
 
 var port = normalizePort(process.env.PORT || '3000');
-set('port', port);
+app.set('port', port);
 
 /**
  * Create HTTP server.
