@@ -19,4 +19,21 @@ const getBoard = async (req, res, next) => {
   next();
 }
 
+router.get('/:id', authenticate, getBoard, (req, res) => res.json(res.board));
+
+router.post('/', authenticate, (req, res) => {
+  const { title } = req.body;
+
+  const b = new Board({
+    title,
+    columns: []
+  });
+  try {
+    const board = b.save();
+    res.status(201).json(board);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+});
+
 export default router;
