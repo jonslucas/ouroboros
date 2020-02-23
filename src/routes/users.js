@@ -60,7 +60,12 @@ const getUser = async (req, res, next) => {
 }
 
 router.get('/:id', authenticate, getUser, async (req, res) => {
+  res.json(res.user);
+});
 
+// Get the boards for a particular User
+router.get('/:id/boards', authenticate, getUser, async (req, res) => {
+  res.json(res.user.boards);
 });
 router.patch('/:id', authenticate, getUser, async (req, res) => {
 
